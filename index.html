@@ -219,6 +219,93 @@
   transition:background .2s,color .2s;
 }
 #modal-contact-inner .close-x:hover{color:var(--cream);background:rgba(128,128,128,.22);}
+
+/* ── Modal Installation (Ajouter à l'écran d'accueil) ── */
+#modal-install{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;padding:20px;
+}
+#modal-install.open{display:flex;}
+#modal-install-inner{
+  background:var(--bg-card);border:1px solid var(--border-h);
+  border-radius:20px;padding:26px 22px;max-width:420px;width:100%;
+  max-height:85vh;overflow-y:auto;
+  box-shadow:0 20px 60px var(--shadow);
+  animation:nlFade .3s ease;position:relative;
+}
+#modal-install-inner .close-x{
+  position:absolute;top:14px;right:16px;
+  background:rgba(128,128,128,.12);border:1px solid var(--border);
+  border-radius:8px;color:var(--cream-dim);font-size:16px;
+  cursor:pointer;line-height:1;padding:5px 8px;
+  transition:background .2s,color .2s;
+}
+#modal-install-inner .close-x:hover{color:var(--cream);background:rgba(128,128,128,.22);}
+.install-hero{text-align:center;margin-bottom:18px;}
+.install-hero-icon{font-size:32px;margin-bottom:6px;}
+.install-hero h3{font-family:var(--font-title);font-size:20px;color:var(--cream);font-weight:700;margin:0 0 6px;}
+.install-hero-sub{font-size:12.5px;color:var(--cream-dim);line-height:1.6;}
+.install-os-tabs{display:flex;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:18px;}
+.install-os-tab{flex:1;padding:10px;text-align:center;font-size:13px;color:var(--cream-dim);background:var(--bg-panel);border:none;cursor:pointer;font-family:var(--font-body);transition:all .2s;}
+.install-os-tab:first-child{border-right:1px solid var(--border);}
+.install-os-tab.active{background:rgba(216,178,92,.14);color:var(--gold);}
+.install-steps{display:none;}
+.install-steps.active{display:block;}
+.install-step{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start;}
+.install-step-num{
+  width:26px;height:26px;flex-shrink:0;border-radius:50%;
+  background:rgba(216,178,92,.14);border:1.5px solid var(--gold-dim);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:var(--gold);
+}
+.install-step div:last-child{font-size:13px;color:var(--cream-dim);line-height:1.6;}
+.install-step strong{color:var(--cream);}
+.install-native-btn{
+  display:block;width:100%;padding:12px;margin-top:4px;
+  background:linear-gradient(135deg,var(--emerald-dark),var(--emerald));
+  border:none;border-radius:12px;color:var(--white);font-size:14px;font-weight:700;
+  cursor:pointer;letter-spacing:.3px;
+}
+.install-native-btn:active{opacity:.85;}
+.install-tip{
+  margin-top:16px;padding:11px 13px;border-radius:10px;
+  background:rgba(63,166,126,.08);border:1px solid rgba(63,166,126,.22);
+  color:var(--emerald-light);font-size:12px;line-height:1.6;
+  display:flex;gap:8px;align-items:flex-start;
+}
+
+/* Pastille discrète + toast (visites suivantes) */
+#fnav-install{position:relative;}
+#fnav-install .fnav-dot{
+  position:absolute;top:0;right:0;
+  width:11px;height:11px;border-radius:50%;
+  background:var(--crimson-light);
+  border:2px solid var(--bg-deep);
+  display:none;
+}
+#fnav-install.has-dot .fnav-dot{display:block;}
+
+#install-toast{
+  position:fixed;left:16px;
+  bottom:calc(38px + env(safe-area-inset-bottom,0) + 16px);
+  z-index:498;max-width:230px;
+  background:var(--bg-card);border:1px solid var(--border-h);
+  border-radius:999px;padding:9px 8px 9px 14px;
+  display:flex;align-items:center;gap:6px;
+  box-shadow:0 6px 20px var(--shadow);
+  font-size:12px;color:var(--cream);font-family:var(--font-body);
+  cursor:pointer;
+  opacity:0;transform:translateY(8px) scale(.96);
+  pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;
+}
+#install-toast.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+#install-toast .toast-close{
+  background:none;border:none;color:var(--cream-dim);
+  font-size:13px;cursor:pointer;padding:2px 4px;line-height:1;
+}
+
 /* Décaler le contenu scrollable du bandeau */
 .section{padding-bottom:80px;}
 
@@ -3275,6 +3362,34 @@ document.addEventListener('DOMContentLoaded',init);</script>
   </div>
 </div>
 
+<!-- Modal Installation -->
+<div id="modal-install" onclick="if(event.target===this)closeInstallGuide()">
+  <div id="modal-install-inner">
+    <button class="close-x" onclick="closeInstallGuide()" title="Fermer">✕</button>
+    <div class="install-hero">
+      <div class="install-hero-icon">📲</div>
+      <h3>Installer نور العلم</h3>
+      <div class="install-hero-sub">Ajoutez l'application à votre écran d'accueil — gratuit, sans App Store, fonctionne hors-ligne.</div>
+    </div>
+    <div class="install-os-tabs">
+      <button class="install-os-tab" data-os="ios" onclick="switchInstallOS('ios')">🍎 iPhone</button>
+      <button class="install-os-tab" data-os="android" onclick="switchInstallOS('android')">🤖 Android</button>
+    </div>
+    <div class="install-steps" id="install-steps-ios">
+      <div class="install-step"><span class="install-step-num">1</span><div><strong>Ouvrez le menu Partager</strong><br>Appuyez sur l'icône Partager ⎋ en bas de Safari.</div></div>
+      <div class="install-step"><span class="install-step-num">2</span><div><strong>Sur l'écran d'accueil</strong><br>Faites défiler la liste et choisissez <strong>« Sur l'écran d'accueil »</strong>.</div></div>
+      <div class="install-step"><span class="install-step-num">3</span><div><strong>Confirmez</strong><br>Appuyez sur <strong>« Ajouter »</strong> en haut à droite.</div></div>
+    </div>
+    <div class="install-steps" id="install-steps-android">
+      <div class="install-step"><span class="install-step-num">1</span><div><strong>Menu Chrome</strong><br>Appuyez sur les <strong>⋮ trois points</strong> en haut à droite.</div></div>
+      <div class="install-step"><span class="install-step-num">2</span><div><strong>Installer l'application</strong><br>Choisissez <strong>« Installer l'application »</strong> ou <strong>« Ajouter à l'écran d'accueil »</strong>.</div></div>
+      <div class="install-step"><span class="install-step-num">3</span><div><strong>Confirmez</strong><br>Appuyez sur <strong>« Installer »</strong>.</div></div>
+      <button class="install-native-btn" id="install-native-btn" style="display:none" onclick="triggerNativeInstall()">⬇️ Installer en un clic</button>
+    </div>
+    <div class="install-tip">🎉 Une fois installée, ouvrez l'app directement depuis son icône — elle fonctionne aussi hors-ligne.</div>
+  </div>
+</div>
+
 <button id="tts-fab" onclick="TTS.openConfig()" title="Réglages synthèse vocale"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg></button>
 <div id="float-nav">
   <button class="fnav-btn" id="fnav-back" onclick="fnavBack()" title="Retour" disabled>
@@ -3286,11 +3401,130 @@ document.addEventListener('DOMContentLoaded',init);</script>
   <button class="fnav-btn" id="fnav-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Haut de page">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
+  <button class="fnav-btn" id="fnav-install" onclick="openInstallGuide()" title="Installer l'application">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M3 16v3a2 2 0 002 2h14a2 2 0 002-2v-3"/></svg>
+    <span class="fnav-dot"></span>
+  </button>
+</div>
+
+<div id="install-toast" onclick="openInstallGuide()">
+  <span>📲 Installe l'appli !</span>
+  <button class="toast-close" onclick="event.stopPropagation();dismissInstallToast()">✕</button>
 </div>
 <script>
 var _navHistory=['accueil'];
 function fnavBack(){if(_navHistory.length>1){_navHistory.pop();var prev=_navHistory[_navHistory.length-1];showSection(prev);setTimeout(function(){window.scrollTo({top:0,behavior:'smooth'});},50);}}
 (function(){var _orig=window.showSection;if(_orig){window.showSection=function(id){if(_navHistory[_navHistory.length-1]!==id){_navHistory.push(id);if(_navHistory.length>20)_navHistory.shift();}var btn=document.getElementById('fnav-back');if(btn)btn.disabled=_navHistory.length<=1;_orig.call(this,id);};}}());
+</script>
+<script>
+(function(){
+  var SEEN_KEY = 'nur_al_ilm_install_seen';
+  var TOAST_COUNT_KEY = 'nur_al_ilm_install_toast_count';
+  var MAX_TOASTS = 3; // nombre de visites où le petit toast réapparaît avant de se taire définitivement
+  var deferredPrompt = null;
+
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredPrompt = e;
+    var btn = document.getElementById('install-native-btn');
+    if(btn) btn.style.display = 'block';
+  });
+
+  window.triggerNativeInstall = function(){
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.finally(function(){ deferredPrompt = null; });
+  };
+
+  function isStandalone(){
+    return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  }
+  function isIOS(){
+    return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
+  function isMobile(){
+    return /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+  }
+
+  window.switchInstallOS = function(os){
+    document.querySelectorAll('.install-os-tab').forEach(function(t){ t.classList.toggle('active', t.dataset.os === os); });
+    document.querySelectorAll('.install-steps').forEach(function(s){ s.classList.remove('active'); });
+    var el = document.getElementById('install-steps-' + os);
+    if(el) el.classList.add('active');
+  };
+
+  window.openInstallGuide = function(){
+    hideInstallToast();
+    var modal = document.getElementById('modal-install');
+    if(!modal) return;
+    modal.classList.add('open');
+    switchInstallOS(isIOS() ? 'ios' : 'android');
+  };
+
+  window.closeInstallGuide = function(){
+    var modal = document.getElementById('modal-install');
+    if(modal) modal.classList.remove('open');
+    try{ localStorage.setItem(SEEN_KEY, '1'); }catch(e){}
+  };
+
+  function hideInstallToast(){
+    var toast = document.getElementById('install-toast');
+    if(toast) toast.classList.remove('show');
+  }
+
+  window.dismissInstallToast = function(){
+    hideInstallToast();
+  };
+
+  function showInstallDot(){
+    var btn = document.getElementById('fnav-install');
+    if(btn) btn.classList.add('has-dot');
+  }
+
+  function showInstallToast(){
+    var toast = document.getElementById('install-toast');
+    if(!toast) return;
+    toast.classList.add('show');
+    setTimeout(hideInstallToast, 6000);
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('fnav-install');
+
+    if(isStandalone()){
+      // App déjà installée : on cache tout le système d'install
+      if(btn) btn.style.display = 'none';
+      var toastEl = document.getElementById('install-toast');
+      if(toastEl) toastEl.style.display = 'none';
+      return;
+    }
+    if(!isMobile()) return;
+
+    var seen = false;
+    try{ seen = localStorage.getItem(SEEN_KEY) === '1'; }catch(e){}
+
+    if(!seen){
+      // Première visite : popup complet, comme avant
+      setTimeout(function(){ openInstallGuide(); }, 4000);
+      return;
+    }
+
+    // Visites suivantes : plus jamais de popup plein écran —
+    // juste une pastille discrète sur le bouton flottant…
+    showInstallDot();
+
+    // …et un petit toast qui apparaît et disparaît tout seul,
+    // limité à quelques visites pour ne pas être lassant.
+    var toastCount = 0;
+    try{ toastCount = parseInt(localStorage.getItem(TOAST_COUNT_KEY) || '0', 10); }catch(e){}
+    if(toastCount < MAX_TOASTS){
+      setTimeout(function(){
+        showInstallToast();
+        try{ localStorage.setItem(TOAST_COUNT_KEY, String(toastCount + 1)); }catch(e){}
+      }, 3000);
+    }
+  });
+})();
 </script>
 <script>
 (function(){
