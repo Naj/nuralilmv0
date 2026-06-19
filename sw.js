@@ -1,5 +1,5 @@
-// نور العلم — Service Worker v36
-const CACHE_NAME = 'nur-al-ilm-v36';
+// نور العلم — Service Worker v37
+const CACHE_NAME = 'nur-al-ilm-v37';
 const PRECACHE = ['/', '/index.html', '/manifest.json', '/icon-192.png', '/icon-512.png'];
 
 self.addEventListener('install', e => {
