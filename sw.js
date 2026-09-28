@@ -1,5 +1,5 @@
-// نور العلم — Service Worker v41
-const CACHE_NAME = 'nur-al-ilm-v41';
+// نور العلم — Service Worker v42
+const CACHE_NAME = 'nur-al-ilm-v42';
 const DATA_CACHE = 'nur-al-ilm-data';          // données du rappel (conservées entre versions)
 const DATA_URL = '/__nur/hadiths.json';
 const PRECACHE = ['/', '/index.html', '/manifest.json', '/icon-192.png', '/icon-512.png'];
@@ -22,7 +22,7 @@ self.addEventListener('fetch', e => {
   if (['api.elevenlabs.io','server8.mp3quran.net','fonts.googleapis.com','fonts.gstatic.com']
       .some(d => url.hostname.includes(d))) return;
   e.respondWith(
-    caches.match(e.request).then(cached => {
+    caches.match(e.request, { ignoreSearch: e.request.mode === 'navigate' }).then(cached => {
       if (cached) return cached;
       return fetch(e.request).then(res => {
         if (!res || res.status !== 200 || res.type !== 'basic') return res;

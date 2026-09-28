@@ -39,5 +39,59 @@
   "categories": [
     "education",
     "lifestyle"
+  ],
+  "shortcuts": [
+    {
+      "name": "Horaires de prière",
+      "short_name": "Horaires",
+      "description": "Prochaine prière et horaires du jour",
+      "url": "/?vue=widget",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Hadith du jour",
+      "short_name": "Hadith",
+      "description": "Le hadith du jour",
+      "url": "/?hadith=1",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Mode veille",
+      "short_name": "Veille",
+      "description": "Hadiths en plein écran",
+      "url": "/?veille=1",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Guide de prière",
+      "short_name": "Guide",
+      "description": "La prière pas à pas",
+      "url": "/?guide=1",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
   ]
 }

@@ -1,5 +1,24 @@
 # Changelog — نور العلم
 
+## v42 — 28 septembre 2026
+
+### Horaires de prière
+- **17 méthodes de calcul**, classées par région : Ligue islamique mondiale, ISNA, Égypte, Karachi, Umm al-Qurâ, Golfe, Koweït, Qatar, Diyanet (Turquie), MUIS (Singapour), Habous (Maroc), Algérie, Tunisie, UOIF, France 15°, France 18°, et **angles personnalisés**.
+- **Réglages avancés** : calcul du 'Asr (majorité dont malikite / hanafite), règle des hautes latitudes (angle, milieu de la nuit, 1/7 de la nuit, aucune), latitude/longitude manuelles.
+- **Ajustements manuels** en minutes pour chaque prière, pour coller au calendrier de sa mosquée.
+- **Comparateur** : Fajr et 'Ishâ' du jour pour toutes les méthodes, côte à côte.
+- 7 villes ajoutées (Londres, Rabat, Oran, Le Caire, Istanbul, Bamako, Abidjan).
+
+### Écran widget & raccourcis
+- **Écran widget** plein écran : prochaine prière en grand avec compte à rebours, horaires du jour, hadith du jour, date hégirienne ; rafraîchi toutes les 30 s. Accessible depuis l'accueil, les Horaires, ou l'URL `/?vue=widget`.
+- **Raccourcis d'application** (manifest `shortcuts`) : appui long sur l'icône → Horaires, Hadith du jour, Mode veille, Guide de prière (Android/Chrome, Windows/Edge).
+
+### Mode veille
+- Deux nouveaux styles en plus de « Mihrab » : **Nuit calme** (texte seul, horloge discrète en bas) et **Ciel étoilé** (étoiles scintillantes, croissant de lune, étoile filante occasionnelle ; animation à ~20 i/s, figée si « réduire les animations »). Choix dans les réglages de la veille.
+
+### Technique
+- Service Worker `nur-al-ilm-v42` ; les navigations avec paramètres (`/?vue=widget`…) sont servies hors-ligne.
+
 ## v41 — 28 septembre 2026
 
 ### Relecture fiqh malikite — Piliers, Ramadan, Spiritualité

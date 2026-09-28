@@ -635,6 +635,57 @@ html.light #logo-fr{color:#8a6820}
 .nv-panel label{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#a89070;margin:8px 0;gap:8px}
 .nv-panel select{background:#111c16;border:1px solid rgba(216,178,92,.3);color:#ECE2CE;border-radius:6px;padding:4px 6px;font-family:inherit}
 @media (prefers-reduced-motion:reduce){.nv-lamp{animation:none}.nv-stage{transition:none}#nur-veille,.nv-text{transition-duration:.01s}}
+
+/* ── v42 : réglages horaires, écran widget, styles de veille ── */
+.nur-adv{margin-top:14px;border-top:1px solid var(--border);padding-top:10px}
+.nur-adv summary{cursor:pointer;font-family:var(--font-title);font-size:18px;color:var(--gold);list-style:none;padding:4px 0}
+.nur-adv summary::before{content:'▸ ';color:var(--gold-dim)}.nur-adv[open] summary::before{content:'▾ '}
+.nur-adj{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:6px}
+.nur-adj label{font-size:13px;color:var(--cream-dim);display:flex;flex-direction:column;gap:4px}
+.nur-adj input{width:100%;min-width:0;background:var(--bg-panel);border:1px solid var(--border-h);color:var(--cream);border-radius:8px;padding:7px;font-family:var(--font-body);font-size:15px}
+.nur-form optgroup{font-style:normal;color:var(--gold)}
+.nur-cmp td{font-size:14px;padding:8px 6px}.nur-cmp td:first-child{color:var(--cream-dim);font-family:var(--font-body)}
+.nur-cmp td:nth-child(2),.nur-cmp td:nth-child(3){font-family:var(--font-title);font-size:17px;color:var(--white);text-align:right}
+#nur-widget{position:fixed;inset:0;z-index:10040;background:var(--bg-deep);background-image:var(--dot-pattern);background-size:22px 22px;display:none;overflow-y:auto;padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(24px + env(safe-area-inset-bottom,0px))}
+#nur-widget.open{display:block}
+#nur-widget>*{max-width:520px;margin-left:auto;margin-right:auto}
+.nw-top{display:flex;justify-content:space-between;align-items:flex-start}
+.nw-date{font-family:var(--font-title);font-size:22px;color:var(--white)}.nw-date::first-letter{text-transform:uppercase}
+.nw-hij{font-size:14px;color:var(--gold-dim);font-style:italic}
+.nw-x{background:none;border:1px solid var(--border-h);color:var(--gold);border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:16px}
+.nw-next{text-align:center;margin:26px 0 18px}
+.nw-lbl{font-family:var(--font-title);font-style:italic;color:var(--gold-dim);font-size:16px;margin-bottom:6px}
+.nw-name{font-family:var(--font-title);font-size:30px;color:var(--white);font-weight:600}.nw-name span{font-family:var(--font-arabic);color:var(--gold);font-size:26px;margin-left:6px}
+.nw-time{font-family:var(--font-title);font-size:clamp(64px,20vw,96px);line-height:1;color:var(--emerald-light);font-variant-numeric:tabular-nums}
+.nw-cd{color:var(--cream-dim);font-size:16px;margin-top:6px}
+.nw-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:22px}
+.nw-grid div{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:10px 4px;text-align:center}
+.nw-grid div.on{border-color:var(--emerald);box-shadow:inset 0 0 0 1px var(--emerald)}
+.nw-grid b{display:block;font-family:var(--font-title);font-size:19px;color:var(--white);font-variant-numeric:tabular-nums}
+.nw-grid span{font-size:12px;color:var(--cream-dim)}
+.nw-hadith{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px 18px}
+.nw-ar{font-family:var(--font-arabic);font-size:24px;color:var(--gold);direction:rtl;text-align:right;line-height:1.9}
+.nw-fr{font-size:17px;color:var(--cream);line-height:1.6;margin-top:6px}.nw-src{font-size:13px;color:var(--cream-dim);font-style:italic;margin-top:8px}
+.nw-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+/* Styles de veille */
+.nv-sky,.nv-moon{display:none;position:absolute;pointer-events:none}
+.nv-sky{inset:0;width:100%;height:100%}
+.nv-moon{width:clamp(56px,9vw,90px);height:auto;top:calc(22px + env(safe-area-inset-top,0px));right:clamp(18px,6vw,70px);filter:drop-shadow(0 0 18px rgba(241,221,160,.25))}
+#nur-veille.st-nuit,#nur-veille.st-ciel{background-image:none}
+#nur-veille.st-nuit{background-color:#040806}
+#nur-veille.st-ciel{background-color:#050b10;background-image:radial-gradient(ellipse at 50% 120%,rgba(30,107,77,.28),transparent 60%),radial-gradient(ellipse at 20% -10%,rgba(40,60,90,.35),transparent 55%)}
+#nur-veille.st-ciel .nv-sky,#nur-veille.st-ciel .nv-moon{display:block}
+#nur-veille.st-nuit .nv-mihrab svg,#nur-veille.st-ciel .nv-mihrab svg{display:none}
+#nur-veille.st-nuit .nv-mihrab,#nur-veille.st-ciel .nv-mihrab{width:min(88vw,760px);aspect-ratio:auto;height:min(64vh,560px)}
+#nur-veille.st-nuit .nv-text,#nur-veille.st-ciel .nv-text{left:0;right:0;top:0;bottom:10%}
+#nur-veille.st-nuit .nv-prog,#nur-veille.st-ciel .nv-prog{left:40%;right:40%;bottom:2%}
+#nur-veille.st-nuit .nv-clock{top:auto;bottom:calc(58px + env(safe-area-inset-bottom,0px));font-size:clamp(22px,3.4vh,32px);color:rgba(236,226,206,.45);letter-spacing:6px}
+#nur-veille.st-nuit .nv-date{color:rgba(216,178,92,.35)}
+#nur-veille.st-nuit .nv-ar{color:#D8B25C}
+#nur-veille.st-nuit .nv-fr{color:rgba(236,226,206,.82)}
+#nur-veille.st-nuit .nv-sep{width:1px;height:34px;background:rgba(216,178,92,.35)}
+#nur-veille.st-ciel .nv-text{text-shadow:0 0 18px rgba(5,11,16,.9)}
+#nur-veille.st-ciel .nv-stage{top:56%}
 </style>
 
   <meta name="mobile-web-app-capable" content="yes">
@@ -3980,70 +4031,140 @@ function openSalatSub(sub){
 }
 
 /* ───────────── Horaires de prière (calcul local, hors-ligne) ───────────── */
-const CITIES=[['Paris',48.8566,2.3522],['Lyon',45.764,4.8357],['Marseille',43.2965,5.3698],['Toulouse',43.6047,1.4442],['Bordeaux',44.8378,-0.5792],['Lille',50.6292,3.0573],['Nantes',47.2184,-1.5536],['Strasbourg',48.5734,7.7521],['Montpellier',43.6108,3.8767],['Nice',43.7102,7.262],['Bruxelles',50.8503,4.3517],['Genève',46.2044,6.1432],['Montréal',45.5017,-73.5673],['Casablanca',33.5731,-7.5898],['Alger',36.7538,3.0588],['Tunis',36.8065,10.1815],['Dakar',14.7167,-17.4677],['La Mecque',21.4225,39.8262],['Médine',24.4686,39.6142]];
-const METHODS={mwl:{nom:'Ligue islamique mondiale · 18°/17°',f:18,i:17},uoif:{nom:'UOIF (France) · 12°',f:12,i:12},q15:{nom:'Angle 15°',f:15,i:15},umm:{nom:'Umm al-Qurâ · 18,5°/90 min',f:18.5,i:null,im:90}};
+const CITIES=[['Paris',48.8566,2.3522],['Lyon',45.764,4.8357],['Marseille',43.2965,5.3698],['Toulouse',43.6047,1.4442],['Bordeaux',44.8378,-0.5792],['Lille',50.6292,3.0573],['Nantes',47.2184,-1.5536],['Strasbourg',48.5734,7.7521],['Montpellier',43.6108,3.8767],['Nice',43.7102,7.262],['Bruxelles',50.8503,4.3517],['Genève',46.2044,6.1432],['Londres',51.5072,-0.1276],['Montréal',45.5017,-73.5673],['Casablanca',33.5731,-7.5898],['Rabat',34.0209,-6.8416],['Alger',36.7538,3.0588],['Oran',35.6971,-0.6308],['Tunis',36.8065,10.1815],['Le Caire',30.0444,31.2357],['Istanbul',41.0082,28.9784],['Dakar',14.7167,-17.4677],['Bamako',12.6392,-8.0029],['Abidjan',5.36,-4.0083],['La Mecque',21.4225,39.8262],['Médine',24.4686,39.6142]];
+/* f = angle Fajr ; i = angle Isha ; im = Isha à X min après le Maghrib */
+const METHODS={
+  mwl:{nom:'Ligue islamique mondiale (18° / 17°)',f:18,i:17,g:'Monde'},
+  isna:{nom:'ISNA — Amérique du Nord (15° / 15°)',f:15,i:15,g:'Monde'},
+  egypt:{nom:'Autorité égyptienne (19,5° / 17,5°)',f:19.5,i:17.5,g:'Monde'},
+  karachi:{nom:'Université de Karachi (18° / 18°)',f:18,i:18,g:'Monde'},
+  umm:{nom:"Umm al-Qurâ — La Mecque (18,5° / +90 min)",f:18.5,i:null,im:90,g:'Moyen-Orient'},
+  gulf:{nom:'Région du Golfe (19,5° / +90 min)',f:19.5,i:null,im:90,g:'Moyen-Orient'},
+  kuwait:{nom:'Koweït (18° / 17,5°)',f:18,i:17.5,g:'Moyen-Orient'},
+  qatar:{nom:'Qatar (18° / +90 min)',f:18,i:null,im:90,g:'Moyen-Orient'},
+  turkey:{nom:'Diyanet — Turquie (18° / 17°)',f:18,i:17,g:'Moyen-Orient'},
+  singapore:{nom:'MUIS — Singapour (20° / 18°)',f:20,i:18,g:'Asie'},
+  morocco:{nom:'Habous — Maroc (19° / 17°)',f:19,i:17,g:'Maghreb'},
+  algeria:{nom:'Algérie (18° / 17°)',f:18,i:17,g:'Maghreb'},
+  tunisia:{nom:'Tunisie (18° / 18°)',f:18,i:18,g:'Maghreb'},
+  uoif:{nom:'UOIF — France (12° / 12°)',f:12,i:12,g:'France'},
+  fr15:{nom:'France — angle 15° / 15°',f:15,i:15,g:'France'},
+  fr18:{nom:'France — angle 18° / 18°',f:18,i:18,g:'France'},
+  custom:{nom:'Angles personnalisés',f:18,i:17,g:'Personnalisé'}
+};
+const HL={angle:'Proportionnelle à l\'angle (recommandé)',middle:'Milieu de la nuit',seventh:'Un septième de la nuit',none:'Aucune (calcul brut)'};
 const PT_NAMES=[['fajr','Fajr','الفَجْر'],['sunrise','Lever du soleil','الشُّرُوق'],['dhuhr','Dhuhr','الظُّهْر'],['asr',"'Asr",'العَصْر'],['maghrib','Maghrib','المَغْرِب'],['isha',"'Ishâ'",'العِشَاء']];
 const DR=Math.PI/180,sin=d=>Math.sin(d*DR),cos=d=>Math.cos(d*DR),tan=d=>Math.tan(d*DR),asin=x=>Math.asin(x)/DR,acos=x=>Math.acos(x)/DR,atan2=(y,x)=>Math.atan2(y,x)/DR,acot=x=>Math.atan(1/x)/DR;
 const fixA=a=>{a=a-360*Math.floor(a/360);return a<0?a+360:a;},fixH=a=>{a=a-24*Math.floor(a/24);return a<0?a+24:a;};
 function julian(y,m,d){if(m<=2){y-=1;m+=12;}const A=Math.floor(y/100),B=2-A+Math.floor(A/4);return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5;}
 function sunPos(jd){const D=jd-2451545,g=fixA(357.529+0.98560028*D),q=fixA(280.459+0.98564736*D),L=fixA(q+1.915*sin(g)+0.02*sin(2*g)),e=23.439-0.00000036*D;const RA=atan2(cos(e)*sin(L),cos(L))/15;return{decl:asin(sin(e)*sin(L)),eqt:q/15-fixH(RA)};}
-function computeTimes(date,lat,lng,mk){
-  const M=METHODS[mk]||METHODS.mwl;const jd0=julian(date.getFullYear(),date.getMonth()+1,date.getDate())-lng/(15*24);
+function methodOf(c){const base=METHODS[c&&c.method]||METHODS.mwl;if(c&&c.method==='custom')return Object.assign({},base,{f:+c.cf||18,i:+c.ci||17});return base;}
+/* c = {lat,lng,method,asr:'std'|'hanafi',hl:'angle'|'middle'|'seventh'|'none',adj:{fajr:0,...},cf,ci} */
+function computeTimes(date,c,lng2,mk){
+  if(typeof c==='number')c={lat:c,lng:lng2,method:mk};
+  const lat=c.lat,lng=c.lng,M=methodOf(c),asrF=c.asr==='hanafi'?2:1,hl=c.hl||'angle',adj=c.adj||{};
+  const jd0=julian(date.getFullYear(),date.getMonth()+1,date.getDate())-lng/(15*24);
   const mid=t=>fixH(12-sunPos(jd0+t).eqt);
   const ang=(a,t,ccw)=>{const d=sunPos(jd0+t).decl,n=mid(t);const x=(-sin(a)-sin(d)*sin(lat))/(cos(d)*cos(lat));if(x<-1||x>1)return NaN;const T=acos(x)/15;return n+(ccw?-T:T);};
-  const asrT=t=>{const d=sunPos(jd0+t).decl;return ang(-acot(1+tan(Math.abs(lat-d))),t);};
+  const asrT=t=>{const d=sunPos(jd0+t).decl;return ang(-acot(asrF+tan(Math.abs(lat-d))),t);};
   let h={fajr:5,sunrise:6,dhuhr:12,asr:13,sunset:18,isha:18};
   for(let k=0;k<2;k++){const f=x=>(isNaN(x)?12:x)/24;h={fajr:ang(M.f,f(h.fajr),true),sunrise:ang(0.833,f(h.sunrise),true),dhuhr:mid(f(h.dhuhr)),asr:asrT(f(h.asr)),sunset:ang(0.833,f(h.sunset)),isha:M.i?ang(M.i,f(h.isha)):NaN};}
   if(M.im)h.isha=h.sunset+M.im/60;
-  const night=24-(h.sunset-h.sunrise);
-  const pf=M.f/60*night;if(isNaN(h.fajr)||(h.sunrise-h.fajr)>pf)h.fajr=h.sunrise-pf;
-  if(!M.im){const pi=M.i/60*night;if(isNaN(h.isha)||(h.isha-h.sunset)>pi)h.isha=h.sunset+pi;}
+  if(hl!=='none'){
+    const night=24-(h.sunset-h.sunrise);
+    const portion=a=>hl==='middle'?night/2:hl==='seventh'?night/7:a/60*night;
+    const pf=portion(M.f);if(isNaN(h.fajr)||(h.sunrise-h.fajr)>pf)h.fajr=h.sunrise-pf;
+    if(!M.im){const pi=portion(M.i);if(isNaN(h.isha)||(h.isha-h.sunset)>pi)h.isha=h.sunset+pi;}
+  }
   h.dhuhr+=1/60;h.maghrib=h.sunset+1/60;
   const base=Date.UTC(date.getFullYear(),date.getMonth(),date.getDate());const out={};
-  ['fajr','sunrise','dhuhr','asr','maghrib','isha'].forEach(k=>{const utc=h[k]-lng/15;out[k]=isNaN(utc)?null:new Date(base+Math.round(utc*60)*60000);});
+  ['fajr','sunrise','dhuhr','asr','maghrib','isha'].forEach(k=>{const utc=h[k]-lng/15+(+adj[k]||0)/60;out[k]=isNaN(utc)?null:new Date(base+Math.round(utc*60)*60000);});
   return out;
 }
 function ptCfg(){return lsGet(K_PT,null);}
 const fmt=d=>d?pad(d.getHours())+':'+pad(d.getMinutes()):'—';
-function nextPrayer(){const c=ptCfg();if(!c)return null;const now=new Date();const main=['fajr','dhuhr','asr','maghrib','isha'];
-  const t=computeTimes(now,c.lat,c.lng,c.method);for(const k of main){if(t[k]&&t[k]>now)return{k,d:t[k]};}
-  const tm=new Date(now);tm.setDate(tm.getDate()+1);const t2=computeTimes(tm,c.lat,c.lng,c.method);return{k:'fajr',d:t2.fajr,tomorrow:true};}
+function nextPrayer(){const c=ptCfg();if(!c||c.lat==null)return null;const now=new Date();const main=['fajr','dhuhr','asr','maghrib','isha'];
+  const t=computeTimes(now,c);for(const k of main){if(t[k]&&t[k]>now)return{k,d:t[k]};}
+  const tm=new Date(now);tm.setDate(tm.getDate()+1);const t2=computeTimes(tm,c);return{k:'fajr',d:t2.fajr,tomorrow:true};}
 function cd(d){const m=Math.max(0,Math.round((d-new Date())/60000));const h=Math.floor(m/60);return h?`dans ${h} h ${pad(m%60)}`:`dans ${m} min`;}
+let ptAdvOpen=false,ptCmpOpen=false;
 function renderHoraires(){
-  const el=$('horaires-container');if(!el)return;const c=ptCfg();
-  const cityOpts=CITIES.map((x,i)=>`<option value="${i}" ${c&&c.name===x[0]?'selected':''}>${x[0]}</option>`).join('');
-  const methOpts=Object.entries(METHODS).map(([k,m])=>`<option value="${k}" ${(c?c.method:'mwl')===k?'selected':''}>${m.nom}</option>`).join('');
+  const el=$('horaires-container');if(!el)return;const c=ptCfg()||{};const has=c.lat!=null;
+  const cityOpts=CITIES.map((x,i)=>`<option value="${i}" ${c.name===x[0]?'selected':''}>${x[0]}</option>`).join('');
+  const groups=[...new Set(Object.values(METHODS).map(m=>m.g))];
+  const methOpts=groups.map(g=>`<optgroup label="${g}">${Object.entries(METHODS).filter(([,m])=>m.g===g).map(([k,m])=>`<option value="${k}" ${(c.method||'mwl')===k?'selected':''}>${m.nom}</option>`).join('')}</optgroup>`).join('');
   let table='';
-  if(c){const t=computeTimes(new Date(),c.lat,c.lng,c.method);const np=nextPrayer();
+  if(has){const t=computeTimes(new Date(),c);const np=nextPrayer();
     table=`<table class="nur-pt">${PT_NAMES.map(([k,fr,ar])=>`<tr class="${k==='sunrise'?'minor':''} ${np&&!np.tomorrow&&np.k===k?'next':''}"><td>${fr}</td><td>${ar}</td><td>${fmt(t[k])}</td></tr>`).join('')}</table>
     ${np?`<div class="nur-note">Prochaine prière : <b>${PT_NAMES.find(p=>p[0]===np.k)[1]}</b> à ${fmt(np.d)}${np.tomorrow?' (demain)':''}, ${cd(np.d)}.</div>`:''}`;}
-  el.innerHTML=`<div style="text-align:center;margin-bottom:14px"><span class="arabic-title" style="font-size:30px">مَوَاقِيتُ الصَّلَاة</span><h3 style="font-family:var(--font-title);color:var(--white);font-size:24px;margin:4px 0 2px">Horaires de prière</h3><p style="font-size:15px;color:var(--cream-dim);font-style:italic;margin:0">${c?esc(c.name)+' · '+new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'}):'Calcul local, fonctionne hors-ligne'}</p></div>
+  const adj=c.adj||{};
+  const adv=`<details class="nur-adv" ${ptAdvOpen?'open':''} ontoggle="NUR.ptToggle('adv',this.open)"><summary>Réglages avancés</summary>
+    <div class="nur-form">
+      <label>Calcul du 'Asr<select onchange="NUR.ptSet('asr',this.value)"><option value="std" ${c.asr!=='hanafi'?'selected':''}>Majorité : Mâlikî, Shâfi'î, Hanbalî (ombre ×1)</option><option value="hanafi" ${c.asr==='hanafi'?'selected':''}>Hanafî (ombre ×2)</option></select></label>
+      <label>Hautes latitudes (été)<select onchange="NUR.ptSet('hl',this.value)">${Object.entries(HL).map(([k,v])=>`<option value="${k}" ${(c.hl||'angle')===k?'selected':''}>${v}</option>`).join('')}</select></label>
+      ${c.method==='custom'?`<label>Angle du Fajr (°)<input type="number" step="0.5" min="10" max="22" value="${c.cf||18}" onchange="NUR.ptSet('cf',this.value)"></label><label>Angle du 'Ishâ' (°)<input type="number" step="0.5" min="10" max="22" value="${c.ci||17}" onchange="NUR.ptSet('ci',this.value)"></label>`:''}
+      <label>Latitude<input type="number" step="0.0001" value="${has?c.lat:''}" onchange="NUR.ptSet('lat',this.value)"></label>
+      <label>Longitude<input type="number" step="0.0001" value="${has?c.lng:''}" onchange="NUR.ptSet('lng',this.value)"></label>
+    </div>
+    <div class="nur-tcard-lbl" style="margin-top:14px">Ajustements manuels (minutes), pour coller au calendrier de votre mosquée</div>
+    <div class="nur-adj">${PT_NAMES.map(([k,fr])=>`<label>${fr}<input type="number" min="-60" max="60" step="1" value="${+adj[k]||0}" onchange="NUR.ptAdj('${k}',this.value)"></label>`).join('')}</div>
+  </details>`;
+  let cmp='';
+  if(has){const rows=Object.entries(METHODS).filter(([k])=>k!=='custom').map(([k,m])=>{const t=computeTimes(new Date(),Object.assign({},c,{method:k}));return `<tr class="${k===(c.method||'mwl')?'next':''}"><td>${m.nom}</td><td>${fmt(t.fajr)}</td><td>${fmt(t.isha)}</td></tr>`;}).join('');
+    cmp=`<details class="nur-adv" ${ptCmpOpen?'open':''} ontoggle="NUR.ptToggle('cmp',this.open)"><summary>Comparer les méthodes aujourd'hui</summary>
+    <div style="overflow-x:auto"><table class="nur-pt nur-cmp"><tr><td></td><td>Fajr</td><td>'Ishâ'</td></tr>${rows}</table></div>
+    <div class="nur-note">Comparez avec l'affichage de votre mosquée et choisissez la méthode la plus proche, puis affinez avec les ajustements manuels.</div></details>`;}
+  el.innerHTML=`<div style="text-align:center;margin-bottom:14px"><span class="arabic-title" style="font-size:30px">مَوَاقِيتُ الصَّلَاة</span><h3 style="font-family:var(--font-title);color:var(--white);font-size:24px;margin:4px 0 2px">Horaires de prière</h3><p style="font-size:15px;color:var(--cream-dim);font-style:italic;margin:0">${has?esc(c.name||'Position personnalisée')+' · '+new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'}):'Calcul local, fonctionne hors-ligne'}</p></div>
   <div class="nur-tcard">${table||'<div class="ortho-intro" style="margin:0">Choisissez une ville ou utilisez votre position. Le calcul se fait sur votre appareil : aucune donnée n\'est envoyée.</div>'}
-    <div class="nur-row"><button class="nur-btn primary" onclick="NUR.ptLocate()">Utiliser ma position</button></div>
+    <div class="nur-row"><button class="nur-btn primary" onclick="NUR.ptLocate()">Utiliser ma position</button>${has?'<button class="nur-btn" onclick="NUR.widgetOpen()">Écran widget</button>':''}</div>
     <div class="nur-form">
       <label>Ville<select onchange="NUR.ptCity(this.value)"><option value="">— Choisir —</option>${cityOpts}</select></label>
       <label>Méthode de calcul<select onchange="NUR.ptMethod(this.value)">${methOpts}</select></label>
     </div>
-    <div class="nur-note">'Asr calculé selon l'avis de la majorité, dont l'école malikite (ombre égale à l'objet). Les horaires peuvent différer de quelques minutes de ceux de votre mosquée : suivez de préférence son calendrier. Après le Fajr, pensez aux <a href="#" style="color:var(--emerald-light)" onclick="event.preventDefault();NUR.openAdhkar()">adhkâr du matin</a>.</div>
+    ${adv}${cmp}
+    <div class="nur-note">Par défaut, le 'Asr suit l'avis de la majorité, dont l'école malikite (ombre égale à l'objet). Les horaires peuvent différer de quelques minutes de ceux de votre mosquée : suivez de préférence son calendrier. Après le Fajr, pensez aux <a href="#" style="color:var(--emerald-light)" onclick="event.preventDefault();NUR.openAdhkar()">adhkâr du matin</a>.</div>
   </div>`;
 }
-function ptSave(o){const c=ptCfg()||{method:'mwl'};lsSet(K_PT,Object.assign(c,o));renderHoraires();renderToday();}
+function ptSave(o){const c=ptCfg()||{method:'mwl'};lsSet(K_PT,Object.assign(c,o));renderHoraires();renderToday();if(W.open)renderWidget();}
 function ptCity(i){if(i==='')return;const x=CITIES[+i];ptSave({name:x[0],lat:x[1],lng:x[2]});}
-function ptMethod(m){const c=ptCfg();if(!c){lsSet(K_PT,{method:m});return;}ptSave({method:m});}
-function ptLocate(){if(!navigator.geolocation){showToast&&showToast('Géolocalisation indisponible');return;}
+function ptMethod(m){ptSave({method:m});}
+function ptSet(k,v){const num=['lat','lng','cf','ci'];const o={};o[k]=num.includes(k)?(v===''?null:+v):v;if(k==='lat'||k==='lng')o.name='Position personnalisée';ptSave(o);}
+function ptAdj(k,v){const c=ptCfg()||{method:'mwl'};const a=Object.assign({},c.adj||{});a[k]=Math.max(-60,Math.min(60,+v||0));ptSave({adj:a});}
+function ptToggle(w,o){if(w==='adv')ptAdvOpen=o;else ptCmpOpen=o;}
+function ptLocate(){if(!navigator.geolocation){typeof showToast==='function'&&showToast('Géolocalisation indisponible');return;}
   navigator.geolocation.getCurrentPosition(p=>{ptSave({name:'Ma position',lat:+p.coords.latitude.toFixed(4),lng:+p.coords.longitude.toFixed(4)});},
   ()=>{typeof showToast==='function'&&showToast('Position refusée — choisissez une ville');},{timeout:10000,maximumAge:36e5});}
 function openAdhkar(){if(typeof showSection==='function')showSection('invocations');const b=[...document.querySelectorAll('#section-invocations .inner-tab')].find(x=>/Matin/.test(x.textContent));if(b)showInner('inv','adhkar',b);}
+
+/* ───────────── Écran « widget » (vue compacte, raccourci d'accueil) ───────────── */
+let W={open:false,timer:null};
+function renderWidget(){
+  const el=$('nur-widget');if(!el)return;const c=ptCfg()||{};const has=c.lat!=null;const now=new Date();
+  const np=nextPrayer();const t=has?computeTimes(now,c):null;const h=hadithDuJour();
+  let hij='';try{hij=new Intl.DateTimeFormat('fr-FR-u-ca-islamic',{day:'numeric',month:'long',year:'numeric'}).format(now);}catch(e){}
+  el.innerHTML=`<div class="nw-top"><div><div class="nw-date">${now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})}</div><div class="nw-hij">${hij}</div></div>
+    <button class="nw-x" aria-label="Fermer" onclick="NUR.widgetClose()">✕</button></div>
+    ${np?`<div class="nw-next"><div class="nw-lbl">Prochaine prière · ${esc(c.name||'')}</div>
+      <div class="nw-name">${PT_NAMES.find(p=>p[0]===np.k)[1]} <span>${PT_NAMES.find(p=>p[0]===np.k)[2]}</span></div>
+      <div class="nw-time">${fmt(np.d)}</div><div class="nw-cd">${np.tomorrow?'demain · ':''}${cd(np.d)}</div></div>
+      <div class="nw-grid">${PT_NAMES.filter(p=>p[0]!=='sunrise').map(([k,fr])=>`<div class="${!np.tomorrow&&np.k===k?'on':''}"><b>${fmt(t[k])}</b><span>${fr}</span></div>`).join('')}</div>`
+    :`<div class="nw-next"><div class="nw-lbl">Horaires de prière</div><button class="nur-btn primary" onclick="NUR.widgetClose();NUR.openSalatSub('horaires')">Choisir ma ville</button></div>`}
+    <div class="nw-hadith"><div class="nw-lbl">Hadith du jour</div><div class="nw-ar">${h.ar}</div><div class="nw-fr">« ${esc(h.fr)} »</div><div class="nw-src">${esc(h.src)}</div></div>
+    <div class="nw-actions"><button class="nur-btn" onclick="NUR.widgetClose()">Ouvrir l'application</button><button class="nur-btn" onclick="NUR.widgetClose();NUR.veilleOpen()">Mode veille</button></div>`;
+}
+function widgetOpen(){let el=$('nur-widget');if(!el){el=document.createElement('div');el.id='nur-widget';el.setAttribute('role','dialog');el.setAttribute('aria-label','Écran widget');document.body.appendChild(el);}
+  W.open=true;renderWidget();el.classList.add('open');clearInterval(W.timer);W.timer=setInterval(renderWidget,30000);}
+function widgetClose(){const el=$('nur-widget');W.open=false;clearInterval(W.timer);if(el)el.classList.remove('open');try{if(/[?&]vue=widget/.test(location.search))history.replaceState(null,'',location.pathname);}catch(e){}}
 
 /* ───────────── Accueil : prochaine prière + hadith du jour ───────────── */
 function renderToday(){
   const el=$('nur-today');if(!el)return;const h=hadithDuJour();const np=nextPrayer();
   const pc=np?`<div class="nur-next-name">${PT_NAMES.find(p=>p[0]===np.k)[1]}<span class="nur-next-ar">${PT_NAMES.find(p=>p[0]===np.k)[2]}</span></div><div class="nur-next-time">${fmt(np.d)}</div><div class="nur-next-cd">${np.tomorrow?'demain · ':''}${cd(np.d)}</div>`
     :`<div class="nur-hj-fr" style="margin-top:0">Affichez les horaires de votre ville, calculés hors-ligne.</div>`;
-  el.innerHTML=`<div class="nur-tcard" style="cursor:pointer" onclick="NUR.openSalatSub('horaires')" role="button" tabindex="0"><div class="nur-tcard-lbl">Prochaine prière</div>${pc}<div class="nur-row"><button class="nur-btn" onclick="event.stopPropagation();NUR.openSalatSub('horaires')">${np?'Tous les horaires':'Configurer'}</button></div></div>
+  el.innerHTML=`<div class="nur-tcard" style="cursor:pointer" onclick="NUR.openSalatSub('horaires')" role="button" tabindex="0"><div class="nur-tcard-lbl">Prochaine prière</div>${pc}<div class="nur-row"><button class="nur-btn" onclick="event.stopPropagation();NUR.openSalatSub('horaires')">${np?'Tous les horaires':'Configurer'}</button>${np?'<button class="nur-btn" onclick="event.stopPropagation();NUR.widgetOpen()">Écran widget</button>':''}</div></div>
   <div class="nur-tcard"><div class="nur-tcard-lbl">Hadith du jour</div>
     <div class="nur-hj-ar">${h.ar} ${ttsBtn(h.ar.replace(' …',''))}</div>
-    <div class="nur-hj-fr">« ${esc(h.fr)} »</div><div class="nur-hj-src">${esc(h.src)}</div>
+    <div class="nur-hj-fr">« ${esc(h.fr)} »</div><div class="nur-hj-src">${esc(h.src)}</div>
     <div class="nur-row">${h.n?`<button class="nur-btn" onclick="NUR.openNawawi()">Voir dans les 40 Nawawî</button>`:''}<button class="nur-btn" onclick="NUR.veilleOpen()">Mode veille</button><button class="nur-btn" id="nur-bell" onclick="NUR_NOTIF.open()">${(typeof NUR_NOTIF!=='undefined')?NUR_NOTIF.label():'🔔 Rappel quotidien'}</button></div>
   </div>`;
 }
@@ -4064,7 +4185,8 @@ function nawLabel(btn){const n=+btn.dataset.naw;const ok=st().nawawiAppris.inclu
 function afterModal(body){if(!body)return;body.querySelectorAll('[data-naw]').forEach(nawLabel);}
 
 /* ───────────── Mode veille « Mihrab » ───────────── */
-const VDEF={delay:5,interval:25,wake:true};
+const VDEF={delay:5,interval:25,wake:true,style:'mihrab'};
+const VSTYLES={mihrab:'Mihrab',nuit:'Nuit calme',ciel:'Ciel étoilé'};
 let V={open:false,idx:0,list:[],timer:null,idle:null,clock:null,wl:null,curT:null,cfg:null};
 function vcfg(){if(!V.cfg)V.cfg=Object.assign({},VDEF,lsGet(K_VEILLE,{}));return V.cfg;}
 function mihrabSVG(){return `<svg viewBox="0 0 300 460" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
@@ -4078,12 +4200,15 @@ function mihrabSVG(){return `<svg viewBox="0 0 300 460" aria-hidden="true" prese
 </svg>`;}
 function buildVeille(){
   if($('nur-veille'))return;const d=document.createElement('div');d.id='nur-veille';d.setAttribute('role','dialog');d.setAttribute('aria-label','Mode veille — hadiths');
-  d.innerHTML=`<div class="nv-clock"><span id="nv-time">--:--</span><div class="nv-date" id="nv-date"></div></div>
+  d.innerHTML=`<canvas class="nv-sky" id="nv-sky" aria-hidden="true"></canvas>
+  <svg class="nv-moon" viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="nvMoonGlow"><stop offset="0" stop-color="#F1DDA0" stop-opacity=".35"/><stop offset="1" stop-color="#F1DDA0" stop-opacity="0"/></radialGradient></defs><circle cx="50" cy="50" r="48" fill="url(#nvMoonGlow)"/><path d="M58 22a30 30 0 1 0 0 56a24 24 0 1 1 0-56z" fill="#E6C878"/></svg>
+  <div class="nv-clock"><span id="nv-time">--:--</span><div class="nv-date" id="nv-date"></div></div>
   <div class="nv-stage" id="nv-stage"><div class="nv-mihrab">${mihrabSVG()}
     <div class="nv-text" id="nv-text"><div class="nv-ar" id="nv-ar"></div><div class="nv-sep"></div><div class="nv-fr" id="nv-fr"></div><div class="nv-src" id="nv-src"></div></div>
     <div class="nv-prog"><i id="nv-prog"></i></div></div></div>
   <div class="nv-hint" id="nv-hint">Touchez l'écran pour revenir</div>
   <div class="nv-panel" id="nv-panel" onclick="event.stopPropagation()"><h5>Mode veille</h5>
+    <label>Style<select id="nv-style"><option value="mihrab">Mihrab</option><option value="nuit">Nuit calme</option><option value="ciel">Ciel étoilé</option></select></label>
     <label>Se déclenche après<select id="nv-delay"><option value="0">Jamais (manuel)</option><option value="2">2 min</option><option value="5">5 min</option><option value="10">10 min</option></select></label>
     <label>Hadith suivant toutes les<select id="nv-int"><option value="15">15 s</option><option value="25">25 s</option><option value="45">45 s</option><option value="90">90 s</option></select></label>
     <label>Garder l'écran allumé<select id="nv-wake"><option value="1">Oui</option><option value="0">Non</option></select></label></div>
@@ -4093,16 +4218,33 @@ function buildVeille(){
   document.body.appendChild(d);
   d.addEventListener('click',e=>{if(e.target.closest('.nv-panel,.nv-ctrl'))return;veilleClose();});
   let mv=null;d.addEventListener('mousemove',()=>{d.classList.add('cursor');clearTimeout(mv);mv=setTimeout(()=>d.classList.remove('cursor'),2500);});
-  const c=vcfg();const sd=$('nv-delay'),si=$('nv-int'),sw=$('nv-wake');sd.value=String(c.delay);si.value=String(c.interval);sw.value=c.wake?'1':'0';
+  const c=vcfg();const sd=$('nv-delay'),si=$('nv-int'),sw=$('nv-wake'),ss=$('nv-style');sd.value=String(c.delay);ss.value=c.style||'mihrab';applyStyle();
+  ss.onchange=()=>{c.style=ss.value;lsSet(K_VEILLE,c);applyStyle();fitText();};si.value=String(c.interval);sw.value=c.wake?'1':'0';
   sd.onchange=()=>{c.delay=+sd.value;lsSet(K_VEILLE,c);armIdle();};
   si.onchange=()=>{c.interval=+si.value;lsSet(K_VEILLE,c);schedule();};
   sw.onchange=()=>{c.wake=sw.value==='1';lsSet(K_VEILLE,c);c.wake?wakeOn():wakeOff();};
 }
+function applyStyle(){const d=$('nur-veille');if(!d)return;const st=vcfg().style||'mihrab';d.classList.remove('st-mihrab','st-nuit','st-ciel');d.classList.add('st-'+st);if(st==='ciel'&&V.open)skyStart();else skyStop();}
+/* Ciel étoilé : champ d'étoiles scintillant, très lent, économe (≈20 i/s) */
+let SKY={raf:0,stars:[],last:0,shoot:null,nextShoot:0};
+function skyInit(cv){const dpr=Math.min(2,window.devicePixelRatio||1);cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;const n=Math.round(innerWidth*innerHeight/6500);
+  SKY.stars=Array.from({length:Math.min(260,Math.max(90,n))},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height*0.92,r:(Math.random()<.08?1.6:Math.random()*1.1+.3)*dpr,p:Math.random()*6.28,s:.4+Math.random()*1.2,g:Math.random()<.18}));SKY.dpr=dpr;}
+function skyDraw(ts){const cv=$('nv-sky');if(!cv)return;const ctx=cv.getContext('2d');if(ts-SKY.last<50){SKY.raf=requestAnimationFrame(skyDraw);return;}SKY.last=ts;
+  ctx.clearRect(0,0,cv.width,cv.height);const t=ts/1000;
+  for(const s of SKY.stars){const a=.35+.65*(0.5+0.5*Math.sin(t*s.s+s.p));ctx.globalAlpha=a;ctx.fillStyle=s.g?'#F1DDA0':'#ECE2CE';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.283);ctx.fill();}
+  if(!SKY.shoot&&ts>SKY.nextShoot){SKY.shoot={x:Math.random()*cv.width*.7,y:Math.random()*cv.height*.35,l:0};SKY.nextShoot=ts+22000+Math.random()*20000;}
+  if(SKY.shoot){const sh=SKY.shoot;sh.l+=18*SKY.dpr;const g=ctx.createLinearGradient(sh.x,sh.y,sh.x+sh.l,sh.y+sh.l*.45);g.addColorStop(0,'rgba(241,221,160,0)');g.addColorStop(1,'rgba(241,221,160,.8)');ctx.globalAlpha=1;ctx.strokeStyle=g;ctx.lineWidth=1.2*SKY.dpr;ctx.beginPath();ctx.moveTo(sh.x,sh.y);ctx.lineTo(sh.x+sh.l,sh.y+sh.l*.45);ctx.stroke();if(sh.l>260*SKY.dpr)SKY.shoot=null;}
+  ctx.globalAlpha=1;SKY.raf=requestAnimationFrame(skyDraw);}
+function skyStart(){const cv=$('nv-sky');if(!cv)return;skyInit(cv);cancelAnimationFrame(SKY.raf);SKY.nextShoot=performance.now()+8000;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){SKY.last=-1e9;SKY.shoot=null;SKY.nextShoot=Infinity;skyDraw(performance.now());cancelAnimationFrame(SKY.raf);return;}
+  SKY.raf=requestAnimationFrame(skyDraw);}
+function skyStop(){cancelAnimationFrame(SKY.raf);SKY.raf=0;}
+window.addEventListener('resize',()=>{if(V.open&&vcfg().style==='ciel')skyStart();});
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function fitText(){const box=$('nv-text'),ar=$('nv-ar'),fr=$('nv-fr');if(!box)return;const w=box.clientWidth;let a=Math.max(18,Math.min(30,w/12)),f=Math.max(14,Math.min(19,w/19));
   ar.style.fontSize=a+'px';fr.style.fontSize=f+'px';let g=0;while(box.scrollHeight>box.clientHeight+2&&g<14){a*=.92;f*=.94;ar.style.fontSize=a+'px';fr.style.fontSize=f+'px';g++;}}
 function showHadith(i){const h=V.list[i%V.list.length];const t=$('nv-text');if(!t)return;t.classList.add('fade');
-  setTimeout(()=>{$('nv-ar').textContent=h.ar;$('nv-fr').textContent='« '+h.fr+' »';$('nv-src').textContent=h.src;fitText();
+  setTimeout(()=>{$('nv-ar').textContent=h.ar;$('nv-fr').textContent='« '+h.fr+' »';$('nv-src').textContent=h.src;fitText();
     const stg=$('nv-stage');if(stg&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const dx=Math.round(Math.random()*24-12),dy=Math.round(Math.random()*16-8);stg.style.transform=`translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px))`;}
     t.classList.remove('fade');prog();},V.idx===0&&i===0?0:900);}
 function prog(){const p=$('nv-prog');if(!p)return;const ms=vcfg().interval*1000;p.style.transition='none';p.style.width='0';void p.offsetWidth;p.style.transition=`width ${ms}ms linear`;p.style.width='100%';}
@@ -4114,8 +4256,8 @@ function wakeOff(){try{if(V.wl){V.wl.release();V.wl=null;}}catch(e){}}
 function veilleOpen(){buildVeille();if(V.open)return;const d=$('nur-veille');V.open=true;V.list=shuffle(corpus(true));V.idx=0;
   d.classList.add('open');requestAnimationFrame(()=>d.classList.add('show'));tick();V.clock=setInterval(tick,15000);
   const hint=$('nv-hint');hint.style.opacity='1';setTimeout(()=>{hint.style.opacity='0';},4000);
-  showHadith(0);schedule();wakeOn();clearTimeout(V.idle);}
-function veilleClose(){if(!V.open)return;const d=$('nur-veille');V.open=false;clearInterval(V.timer);clearInterval(V.clock);wakeOff();
+  applyStyle();showHadith(0);schedule();wakeOn();clearTimeout(V.idle);}
+function veilleClose(){if(!V.open)return;const d=$('nur-veille');V.open=false;skyStop();clearInterval(V.timer);clearInterval(V.clock);wakeOff();
   d.classList.remove('show');$('nv-panel').classList.remove('open');setTimeout(()=>{if(!V.open)d.classList.remove('open');},900);armIdle();}
 function veilleNext(){if(!V.open)return;V.idx++;showHadith(V.idx);schedule();}
 function armIdle(){clearTimeout(V.idle);const m=vcfg().delay;if(!m||V.open)return;V.idle=setTimeout(()=>{if(!document.hidden&&!V.open)veilleOpen();},m*60000);}
@@ -4134,10 +4276,16 @@ function init(){
   });
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&V.open)wakeOn();});
   armIdle();updateDash();
+  const q=new URLSearchParams(location.search);
+  if(q.get('vue')==='widget')setTimeout(widgetOpen,300);
+  else if(q.get('veille')==='1')setTimeout(()=>{veilleOpen();try{history.replaceState(null,'',location.pathname);}catch(e){}},400);
+  else if(q.get('guide')==='1')setTimeout(()=>{openSalatSub('guide');try{history.replaceState(null,'',location.pathname);}catch(e){}},300);
+  else if(q.get('horaires')==='1')setTimeout(()=>{openSalatSub('horaires');try{history.replaceState(null,'',location.pathname);}catch(e){}},300);
+  document.addEventListener('keydown',e=>{if(W.open&&e.key==='Escape')widgetClose();});
   setInterval(()=>{const a=$('section-accueil');if(a&&a.classList.contains('active'))renderToday();const h=$('salat-horaires');if(h&&h.style.display!=='none')renderHoraires();},60000);
 }
 return{init,updateDash,renderSalatExtras,qunutMemoToggle,qunutAppris:qunutApprisToggle,guideStart,guideMove,openSalatSub,openQunut:()=>openSalatSub('qunut'),
-  ptCity,ptMethod,ptLocate,openAdhkar,openNawawi,veilleOpen,veilleClose,veilleNext,nawToggle,afterModal,computeTimes,corpus};
+  ptCity,ptMethod,ptLocate,ptSet,ptAdj,ptToggle,widgetOpen,widgetClose,openAdhkar,openNawawi,veilleOpen,veilleClose,veilleNext,nawToggle,afterModal,computeTimes,corpus};
 })();
 
 /* Branchements sur les fonctions existantes (sans les réécrire) */
